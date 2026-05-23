@@ -44,12 +44,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickFill = (u: string, p: string) => {
-    setUsername(u);
-    setPassword(p);
-    setError("");
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-50 dark:bg-[#0f141a] px-4 py-12">
       {/* Background soft ambient gradient glows */}
@@ -147,47 +141,6 @@ export default function LoginPage() {
               )}
             </button>
           </form>
-
-          {/* Quick Demo Access Credentials */}
-          <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800/80">
-            <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 flex items-center gap-1.5">
-              <span>Demo Account Quick Fills</span>
-            </h3>
-            <div className="grid grid-cols-2 gap-2 text-left">
-              <button
-                type="button"
-                onClick={() => handleQuickFill("Zadid", "Zadu00789")}
-                className="p-2 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-brand-wine-light dark:hover:bg-brand-wine/10 hover:border-brand-wine/20 text-[11px] font-semibold text-slate-600 dark:text-slate-300 text-left transition-all"
-              >
-                <div className="font-bold text-brand-wine dark:text-brand-peach">Main Admin</div>
-                <div>Zadid (Zadu00789)</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickFill("rafsan", "rafsan123")}
-                className="p-2 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-brand-wine-light dark:hover:bg-brand-wine/10 hover:border-brand-wine/20 text-[11px] font-semibold text-slate-600 dark:text-slate-300 text-left transition-all"
-              >
-                <div className="font-bold text-blue-600">Partner / Investor</div>
-                <div>rafsan (rafsan123)</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickFill("monir", "monir123")}
-                className="p-2 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-brand-wine-light dark:hover:bg-brand-wine/10 hover:border-brand-wine/20 text-[11px] font-semibold text-slate-600 dark:text-slate-300 text-left transition-all"
-              >
-                <div className="font-bold text-emerald-600">Staff / Sales Manager</div>
-                <div>monir (monir123)</div>
-              </button>
-              <button
-                type="button"
-                onClick={() => handleQuickFill("guest", "guest123")}
-                className="p-2 border border-slate-100 dark:border-slate-800 rounded-lg hover:bg-brand-wine-light dark:hover:bg-brand-wine/10 hover:border-brand-wine/20 text-[11px] font-semibold text-slate-600 dark:text-slate-300 text-left transition-all"
-              >
-                <div className="font-bold text-slate-500">Viewer (Read-only)</div>
-                <div>guest (guest123)</div>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </div>

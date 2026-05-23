@@ -12,6 +12,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Username and password are required" }, { status: 400 });
     }
 
+    // Check if user table is completely empty (e.g., on a fresh database deployment)
+    const userCount = await db.user.count();
+    if (userCount === 0) {
+      const adminPassword = hashPassword("Zadu00789");
+      await db.user.create({
+        data: {
+          username: "Zadid",
+          name: "Zadid",
+          passwordHash: adminPassword,
+          role: "ADMIN",
+          permissions: "all",
+        },
+      });
+      await db.activityLog.create({
+        data: {
+          user: "System",
+          action: "Fresh database initialized. Main admin configured.",
+        },
+      });
+    }
+
     // Query user by username
     const user = await db.user.findUnique({
       where: { username },
