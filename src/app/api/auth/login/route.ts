@@ -22,15 +22,19 @@ async function ensureDatabaseSchema() {
     if (error.message?.includes("does not exist") || error.code === "P2021" || error.message?.includes("User")) {
       console.log("Database table missing. Running prisma db push programmatically...");
       try {
-        const cmd = process.platform === "win32" ? "npx.cmd prisma db push --accept-data-loss" : "npx prisma db push --accept-data-loss";
-        execSync(cmd, {
-          env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || "file:./dev.db" },
-          stdio: "inherit"
+        const schemaPath = path.resolve(process.cwd(), "prisma", "schema.prisma");
+        const cmd = process.platform === "win32"
+          ? `npx.cmd prisma db push --schema="${schemaPath}" --accept-data-loss`
+          : `npx prisma db push --schema="${schemaPath}" --accept-data-loss`;
+        const output = execSync(cmd, {
+          env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || "file:./dev.db" }
         });
-        console.log("Database schema pushed successfully!");
+        console.log("Database schema pushed successfully! Output:", output.toString());
       } catch (pushError: any) {
-        console.error("Failed to push prisma schema:", pushError);
-        throw new Error(`Failed to push prisma schema: ${pushError.message}`);
+        const stdout = pushError.stdout ? pushError.stdout.toString() : "";
+        const stderr = pushError.stderr ? pushError.stderr.toString() : "";
+        console.error("Failed to push prisma schema. stdout:", stdout, "stderr:", stderr);
+        throw new Error(`Failed to push prisma schema: ${pushError.message}. stdout: ${stdout}. stderr: ${stderr}`);
       }
     } else {
       throw error;
