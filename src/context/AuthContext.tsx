@@ -68,7 +68,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         router.push("/");
         return { success: true };
       } else {
-        return { success: false, error: data.error || "Login failed" };
+        const errorMsg = data.details ? `${data.error}: ${data.details}` : (data.error || "Login failed");
+        return { success: false, error: errorMsg };
       }
     } catch (err) {
       console.error("Login request failed:", err);

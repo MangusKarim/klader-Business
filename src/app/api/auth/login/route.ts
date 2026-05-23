@@ -88,8 +88,11 @@ export async function POST(req: NextRequest) {
         permissions: user.permissions.split(","),
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Login API error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({
+      error: "Internal server error",
+      details: error.message || String(error),
+    }, { status: 500 });
   }
 }
