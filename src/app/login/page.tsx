@@ -53,8 +53,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md z-10 page-transition">
         {/* Company Branding */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-logo shadow-lg mb-4">
-            <span className="text-white font-display font-extrabold text-2xl tracking-wider">K</span>
+          <div className="inline-flex items-center justify-center mb-4">
+            <img src="/logo.svg" alt="Klader Logo" className="w-16 h-16 object-contain" />
           </div>
           <h1 className="text-3xl font-display font-extrabold tracking-tight text-brand-slate dark:text-white">
             Klader
