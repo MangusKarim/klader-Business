@@ -24,7 +24,7 @@ async function ensureDatabaseSchema() {
       try {
         const schemaPath = path.resolve(process.cwd(), "prisma", "schema.prisma");
         const prismaCliPath = path.resolve(process.cwd(), "node_modules", "prisma", "build", "index.js");
-        const cmd = `node "${prismaCliPath}" db push --schema="${schemaPath}" --accept-data-loss`;
+        const cmd = `"${process.execPath}" "${prismaCliPath}" db push --schema="${schemaPath}" --accept-data-loss`;
         const output = execSync(cmd, {
           env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || "file:./dev.db" }
         });
